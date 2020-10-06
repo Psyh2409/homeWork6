@@ -2,13 +2,9 @@ package com.gmail.psyh2409;
 
 public class Task2 {
     private long result;
-    private int[] array;
-    private int threadsCapacity;
-    private Thread[] threads;
-
-    public Task2() {
-        super();
-    }
+    private final int[] array;
+    private final int threadsCapacity;
+    private final Thread[] threads;
 
     public Task2(int[] array, int threadsCapacity) {
         this.array = array;
@@ -53,12 +49,7 @@ public class Task2 {
     }
 
     public class ThreadClass extends Thread {
-        private int[] localArray;
-
-
-        public ThreadClass() {
-            super();
-        }
+        private final int[] localArray;
 
         public ThreadClass(int[] localArray) {
             super();

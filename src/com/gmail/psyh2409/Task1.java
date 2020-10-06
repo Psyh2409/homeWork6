@@ -3,12 +3,8 @@ package com.gmail.psyh2409;
 import java.math.BigInteger;
 
 public class Task1 {
-    int number = 100;
+    int number;
     Thread[] threads;
-
-    public Task1() {
-        super();
-    }
 
     public Task1(int number) {
         this.number = number;

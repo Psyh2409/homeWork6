@@ -1,10 +1,8 @@
 package com.gmail.psyh2409;
 
-import java.math.BigInteger;
-
 public class Main {
     public static void main(String[] args) {
-        int result1 = 0;
+        int result1;
         int result2 = 0;
 //      Task 1
         System.out.println("Task 1");
