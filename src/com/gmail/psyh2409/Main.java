@@ -4,52 +4,41 @@ import java.math.BigInteger;
 
 public class Main {
     public static void main(String[] args) {
+        int result1 = 0;
+        int result2 = 0;
 //      Task 1
         System.out.println("Task 1");
         long start = System.currentTimeMillis();
-        int number = 100;
-        Thread[] threads = new Thread[number];
-        for (int i = 0; i < number; i++) {
-            int finalI = i;
-            threads[i] = new Thread(() -> {
-                long id = threads[finalI].getId();
-                BigInteger factId = new BigInteger(String.valueOf(id));
-                for (long j = id - 1; j > 0; j--) {
-                    factId = factId.multiply(BigInteger.valueOf(j));
-                }
-                System.out.println(threads[finalI].getName() + " has Id: " + id + ". Factorial of it is:\n" + factId);
-            });
-            threads[i].start();
-        }
-        for (int i = 0; i < number; i++) {
-            try {
-                threads[i].join();
-            } catch (InterruptedException ie) {
-                ie.printStackTrace();
-            }
-        }
+        Task1 task1 = new Task1(100);
+        task1.factorialsCounter();
+        task1.joiner();
         long end = System.currentTimeMillis();
+        result1 = (int) (end - start);
         System.out.println("Task 1 is executed since " + (end - start) + " mls.");
-// Task 1. 100 threads near 144 mls;
-//         10 threads near 103 mls.
 
 //      Task 2
-        System.out.println();
-        System.out.println("Task 2");
-        int numbersCapacity = 1_000;
-        int threadsCapacity = 10;
-        int[] numbers = new int[numbersCapacity];
-        for (int i = 0; i < numbers.length; i++) {
-            numbers[i] = i + 1;
+        for (int x = 0; x < 100; x++) {
+            System.out.println();
+            System.out.println("Task 2");
+            int numbersCapacity = 1_000_000;
+            int threadsCapacity = 10;
+            System.out.println(lawOfAmdal((double) 1000 / 2, 2));
+            int[] numbers = new int[numbersCapacity];
+            for (int i = 0; i < numbers.length; i++) {
+                numbers[i] = i + 1;
+            }
+            start = System.currentTimeMillis();
+            Task2 task2 = new Task2(numbers, threadsCapacity);
+            task2.threadsMaker();
+            end = System.currentTimeMillis();
+            result2 += (end - start);
+            System.out.println("Sum of numbers with multithreading " + task2.getResult() + ". Since " + (end - start) + " mls.");
         }
-        start = System.currentTimeMillis();
-        Task2 task2 = new Task2(numbers, threadsCapacity);
-        task2.threadsMaker();
-        end = System.currentTimeMillis();
+        System.out.println("\n" + "Middle time for Task 1 is: " + result1 + " mls;");
+        System.out.println("Middle time for Task 2 is: " + result2 / 100 + " mls;");
+    }
 
-        System.out.println("Sum of numbers with multithreading " + task2.getResult() + ". Since " + (end - start) + " mls.");
-        //Task 2. As more threads, as longer program is working:
-        //10 threads near 46 mls;
-        //1 thread near 14 mls.
+    public static double lawOfAmdal(double alfa, int threads) {
+        return 1 / (alfa + ((1 - alfa) / threads));
     }
 }
