@@ -20,7 +20,7 @@ public class Main {
             System.out.println("Task 2");
             int numbersCapacity = 1_000_000;
             int threadsCapacity = 10;
-            System.out.println(lawOfAmdal((double) 1000 / 2, 2));
+            System.out.println(lawOfAmdal((double) numbersCapacity / threadsCapacity, threadsCapacity));
             int[] numbers = new int[numbersCapacity];
             for (int i = 0; i < numbers.length; i++) {
                 numbers[i] = i + 1;
